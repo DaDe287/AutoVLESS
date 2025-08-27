@@ -7,9 +7,5 @@ bash <(curl -Ls https://raw.githubusercontent.com/DaDe287/AutoVLESS/main/auto-pa
 
 bash <(curl -Ls https://raw.githubusercontent.com/DaDe287/AutoVLESS/main/install-panel-and-xray.sh)
 
-x-ui
-
-13
-
-
+echo "$13" | x-ui 
 
