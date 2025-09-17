@@ -5,6 +5,8 @@ bash <(curl -Ls https://raw.githubusercontent.com/DaDe287/AutoVLESS/main/install
 
 bash <(curl -Ls https://raw.githubusercontent.com/DaDe287/AutoVLESS/main/auto-panel-ssl.sh)
 
+x-ui restart
+
 bash <(curl -Ls https://raw.githubusercontent.com/DaDe287/AutoVLESS/main/setup-firewall.sh)
 
 echo "$13" | x-ui 
