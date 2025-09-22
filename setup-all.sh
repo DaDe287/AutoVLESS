@@ -9,5 +9,5 @@ x-ui restart
 
 bash <(curl -Ls https://raw.githubusercontent.com/DaDe287/AutoVLESS/main/setup-firewall.sh)
 
-echo "$13" | x-ui 
+x-ui restart
 
