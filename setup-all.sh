@@ -1,7 +1,11 @@
 clear
 echo "y" | sudo apt update && apt upgrade -y
 
-bash <(curl -Ls https://raw.githubusercontent.com/DaDe287/AutoVLESS/main/install-panel-and-xray.sh)
+# --- УСТАНОВКА 3x-ui с перехватом вывода ---
+INSTALL_OUTPUT=$(bash <(curl -Ls https://raw.githubusercontent.com/MHSanaei/3x-ui/master/install.sh) 2>&1)
+
+# Сразу выводим оригинальный лог пользователю
+echo "$INSTALL_OUTPUT"
 
 bash <(curl -Ls https://raw.githubusercontent.com/DaDe287/AutoVLESS/main/auto-panel-ssl.sh)
 
@@ -11,32 +15,21 @@ bash <(curl -Ls https://raw.githubusercontent.com/DaDe287/AutoVLESS/main/setup-f
 
 x-ui restart
 
-# --- ВЫВОД ДАННЫХ 3x-ui В JSON ---
-echo ""
-echo "======================================="
-echo " Получение данных панели 3x-ui..."
-echo "======================================="
+# --- ВЫТАСКИВАЕМ URL и пароль ---
+PANEL_URL=$(echo "$INSTALL_OUTPUT" | grep -iE 'Access URL' | awk -F'URL: ' '{print $2}' | tr -d '[:space:]')
+PASSWORD=$(echo "$INSTALL_OUTPUT" | grep -iE 'password' | awk -F'password: ' '{print $2}' | head -1 | tr -d '[:space:]')
 
-# Получаем IP и порт панели
-PANEL_IP=$(hostname -I | awk '{print $1}')
-PANEL_PORT=$(x-ui status 2>/dev/null | grep -oE ':[0-9]+' | head -1 | tr -d ':')
-
-# Если порт не найден, используем дефолтный 2053
-[ -z "$PANEL_PORT" ] && PANEL_PORT="2053"
-
-# Получаем логин и пароль admin
-XUI_INFO=$(x-ui list | grep admin | head -1)
-USERNAME=$(echo "$XUI_INFO" | awk '{print $2}')
-PASSWORD=$(echo "$XUI_INFO" | awk '{print $3}')
-
-# Подстраховка на случай пустых данных
-[ -z "$USERNAME" ] && USERNAME="admin"
+# Подстраховка
+[ -z "$PANEL_URL" ] && PANEL_URL="(не найден)"
 [ -z "$PASSWORD" ] && PASSWORD="(не найден)"
 
-API_URL="http://${PANEL_IP}:${PANEL_PORT}"
+# Обычно логин по умолчанию — admin
+USERNAME="admin"
 
-# Вывод в JSON
+# Вывод в JSON формате
 echo ""
-echo "Данные панели 3x-ui:"
-echo "{\"apiUrl\": \"${API_URL}\", \"username\": \"${USERNAME}\", \"password\": \"${PASSWORD}\"}"
+echo "======================================="
+echo "   Данные панели 3x-ui"
+echo "======================================="
+echo "{\"apiUrl\": \"${PANEL_URL}\", \"username\": \"${USERNAME}\", \"password\": \"${PASSWORD}\"}"
 echo ""
