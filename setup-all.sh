@@ -24,7 +24,7 @@ PASSWORD=$(echo "$INSTALL_OUTPUT" | grep -iE 'Password' | awk -F'Password: ' '{p
 [ -z "$PASSWORD" ] && PASSWORD="(не найден)"
 
 # Обычно логин по умолчанию — admin
-USERNAME="admin"
+USERNAME=$(echo "$INSTALL_OUTPUT" | grep -iE 'Username' | awk -F'Username: ' '{print $2}' | head -1 | tr -d '[:space:]')
 
 # Вывод в JSON формате
 echo ""
