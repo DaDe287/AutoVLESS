@@ -17,7 +17,7 @@ x-ui restart
 
 # --- ВЫТАСКИВАЕМ URL и пароль ---
 PANEL_URL=$(echo "$INSTALL_OUTPUT" | grep -iE 'Access URL' | awk -F'URL: ' '{print $2}' | tr -d '[:space:]')
-PASSWORD=$(echo "$INSTALL_OUTPUT" | grep -iE 'Password' | awk -F'Password: ' '{print $2}' | head -1 | tr -d '[:space:]')
+PASSWORD=$(echo "$INSTALL_OUTPUT" | grep -iE 'Password' | awk -F'Password: ' '{print $2}' | tr -d '[:space:]')
 
 # Подстраховка
 [ -z "$PANEL_URL" ] && PANEL_URL="(не найден)"
