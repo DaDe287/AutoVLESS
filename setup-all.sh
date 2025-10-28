@@ -16,7 +16,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/DaDe287/AutoVLESS/main/setup-f
 x-ui restart
 
 # --- ВЫТАСКИВАЕМ URL и пароль ---
-PANEL_URL=$(echo "$INSTALL_OUTPUT" | grep -iE 'Access URL' | awk -F'URL: ' '{print $2}' | tr -d '[:space:]')
+PANEL_URL=$(echo "$INSTALL_OUTPUT" | grep -iE 'Access URL' | awk -F'URL: ' '{print $2}' | tr -d '[:space:]' | sed 's|^http://|https://|')
 PASSWORD=$(echo "$INSTALL_OUTPUT" | grep -iE 'Password' | awk -F'Password: ' '{print $2}' | tr -d '[:space:]')
 USERNAME=$(echo "$INSTALL_OUTPUT" | grep -iE 'Username' | awk -F'Username: ' '{print $2}' | tr -d '[:space:]')
 
