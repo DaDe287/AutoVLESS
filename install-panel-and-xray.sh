@@ -95,7 +95,7 @@ config_after_install() {
             local config_password=$(gen_random_string 10)
             local config_port=443
             
-            /usr/local/x-ui/x-ui setting -username "${config_username}" -password "${config_password}" -port "${config_port}" -webBasePath "${config_webBasePath}"
+            /usr/local/x-ui/x-ui setting -username"${config_username}" -password"${config_password}" -port"${config_port}" -webBasePath"${config_webBasePath}"
             echo -e "This is a fresh installation, generating random login info for security concerns:"
             echo -e "###############################################"
             echo -e "${green}Username: ${config_username}${plain}"
