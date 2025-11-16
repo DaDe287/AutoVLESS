@@ -1,4 +1,7 @@
 clear
+
+apt install sudo
+
 echo "y" | sudo apt update && apt upgrade -y
 
 # --- УСТАНОВКА 3x-ui с перехватом вывода ---
