@@ -17,8 +17,8 @@ echo "Y" | sudo apt install iptables
 iptables -A FORWARD -p tcp --dport 6881:6999 -j DROP
 iptables -A FORWARD -p udp --dport 6881:6999 -j DROP
 
-# Block Any scanners to the server
-sudo traffic-guard full \
-  -u https://raw.githubusercontent.com/shadow-netlab/traffic-guard-lists/refs/heads/main/public/antiscanner.list \
-  -u https://raw.githubusercontent.com/shadow-netlab/traffic-guard-lists/refs/heads/main/public/government_networks.list \
-  --enable-logging
+# # Block Any scanners to the server
+# sudo traffic-guard full \
+#   -u https://raw.githubusercontent.com/shadow-netlab/traffic-guard-lists/refs/heads/main/public/antiscanner.list \
+#   -u https://raw.githubusercontent.com/shadow-netlab/traffic-guard-lists/refs/heads/main/public/government_networks.list \
+#   --enable-logging
