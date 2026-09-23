@@ -1,24 +1,19 @@
 # UFW
-
-# COMMON FIREWALL RULES
+# Common Firewall rules
 echo "Y" | sudo apt install ufw
-sudo ufw allow 443/tcp
-sudo ufw allow 8080/tcp
-sudo ufw allow 22/tcp
-sudo ufw allow 80/tcp
-sudo ufw allow 1024:65535/udp
-sudo ufw allow 1024:65535/tcp
-echo "y" | sudo ufw enable
+
+ufw --force reset
+ufw default deny incoming
+ufw default allow outgoing
+for p in 22 80 443 8443 5506 2096; do ufw allow $p/tcp; done
+ufw --force enable
 
 # IPTABLES 
-
 # Block Torrents trafic
 echo "Y" | sudo apt install iptables
 iptables -A FORWARD -p tcp --dport 6881:6999 -j DROP
 iptables -A FORWARD -p udp --dport 6881:6999 -j DROP
 
-# # Block Any scanners to the server
-# sudo traffic-guard full \
-#   -u https://raw.githubusercontent.com/shadow-netlab/traffic-guard-lists/refs/heads/main/public/antiscanner.list \
-#   -u https://raw.githubusercontent.com/shadow-netlab/traffic-guard-lists/refs/heads/main/public/government_networks.list \
-#   --enable-logging
+# Trafic-Guard
+# Block Any scanners to the server
+curl -fsSL https://raw.githubusercontent.com/DaDe287/Traffic-Guard/refs/heads/main/install.sh | sudo bash
