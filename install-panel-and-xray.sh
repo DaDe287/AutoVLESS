@@ -10,10 +10,11 @@ command -v apt-get >/dev/null || die "Нужен Debian/Ubuntu."
 [[ ! -e /etc/x-ui/x-ui.db && ! -e /usr/local/x-ui ]] ||
     die "3x-ui уже установлена. Скрипт предназначен для чистой установки."
 
-DOMAIN="${1:-}"
-[[ -n "$DOMAIN" ]] || read -rp "Домен панели: " DOMAIN
-DOMAIN="${DOMAIN,,}"
-DOMAIN="${DOMAIN%.}"
+DOMAIN=""
+read -r -p "Введите домен панели: " DOMAIN </dev/tty ||
+    die "Не удалось прочитать ввод из терминала."
+
+[[ -n "$DOMAIN" ]] || die "Домен не может быть пустым."
 
 [[ ${#DOMAIN} -le 253 && "$DOMAIN" =~ ^([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$ ]] ||
     die "Введите домен без https://, порта и пути."
