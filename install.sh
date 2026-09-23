@@ -1,5 +1,7 @@
 clear
 
+sudo apt update && sudo apt upgrade -y
+
 # Enable BBR
 sudo modprobe tcp_bbr
 echo "net.core.default_qdisc=fq" | sudo tee -a /etc/sysctl.conf
