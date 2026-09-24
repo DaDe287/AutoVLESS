@@ -24,10 +24,16 @@ exec 3>&1
 exec 1>&2
 
 export DEBIAN_FRONTEND=noninteractive
+echo "[1/4] Домен принят: $DOMAIN" >&2
+
+echo "[2/4] Обновление списка пакетов..." >&2
 apt-get update
+
+echo "[3/4] Установка зависимостей..." >&2
 apt-get install -y \
     curl ca-certificates dnsutils openssl jq iproute2 cron
 
+echo "[4/4] Определение IP и проверка DNS..." >&2
 SERVER_IP=$(
     curl -4fsS --connect-timeout 10 --max-time 20 https://api4.ipify.org
 ) || die "Не удалось определить публичный IPv4."
