@@ -258,6 +258,8 @@ sudo ln -s /etc/nginx/sites-available/self-steal.conf /etc/nginx/sites-enabled
 
 nginx -t
 
+sudo apt-get install -y ufw
+
 REPOS=(
     startbootstrap-agency
     startbootstrap-creative
