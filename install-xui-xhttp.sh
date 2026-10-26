@@ -281,6 +281,8 @@ sudo ln -s /etc/nginx/sites-available/xhttp-serv.conf /etc/nginx/sites-enabled
 
 nginx -t
 
+sudo apt-get install -y git
+
 REPOS=(
     startbootstrap-agency
     startbootstrap-creative
